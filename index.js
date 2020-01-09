@@ -33,6 +33,9 @@ function initWebSocket() {
             "authenticated": false
         };
 
+        // Request UserID and Session String
+        ws.send(JSON.stringify({ "cmd": "sessionRequest" }));
+
         let checkNotifications = new Promise(async resolve => {
             let resp = {
                 "cmd": "updateNotifications",
@@ -68,8 +71,10 @@ function initWebSocket() {
             }
         };
 
-        // Request UserID and Session String
-        ws.send(JSON.stringify({ "cmd": "sessionRequest" }));
+        ws.on('close', () => {
+            console.log(`Client disconnected`)
+        })
+        
         ws.on('message', message => {
             console.log(`Received message => ${message}`);
 
