@@ -25,7 +25,7 @@ function init() {
 }
 
 function initWebSocket() {
-    wss = new WebSocket.Server({ port: 8080 })
+    wss = new WebSocket.Server({ port: 8443 })
 
     wss.on('connection', ws => {
 
